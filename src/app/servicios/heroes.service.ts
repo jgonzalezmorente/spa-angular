@@ -56,11 +56,31 @@ export class HeroesService {
     ];
 
     constructor() {
-        console.log('Servicio listo para usarse');
+      console.log('Servicio listo para usarse');
     }
 
     getHeroes(): Heroe[]{
         return this.heroes;
+    }
+
+    getHeroe( idx: string ): Heroe {
+      return this.heroes[idx];
+    }
+
+    getHeroeIndex( heroe: Heroe ): number {
+      return this.heroes.indexOf( heroe );
+    }
+
+    buscarHeroes( termino: string ): Heroe[] {
+      const heroesArr: Heroe[] = [];
+      termino = termino.toLowerCase();
+      for ( const heroe of this.heroes ) {
+        const nombre = heroe.nombre.toLowerCase();
+        if ( nombre.indexOf( termino ) >= 0 ) {
+          heroesArr.push(heroe);
+        }
+      }
+      return heroesArr;
     }
 }
 

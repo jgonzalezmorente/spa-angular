@@ -1,19 +1,15 @@
-<h1>Héroes <small>Marvel y DC</small></h1>
-<hr>
-
-<div class="card-columns">
-    <div class="card animated fadeIn fast" *ngFor="let heroe of heroes; let i = index">
-        <img [src]=heroe.img class="card-img-top" [alt]="heroe.nombre">
-        <div class="card-body">
-            <h5 class="card-title">{{ heroe.nombre }}</h5>
-            <p class="card-text">{{ heroe.bio }}</p>
-            <p class="card-text"><small class="text-muted">{{ heroe.aparicion }}</small></p>
-            <button (click)="verHeroe(i)" class="btn btn-outline-primary btn-block">
-                Ver más...
-            </button>
-            <!--
-            <a [routerLink]="['/heroe', i]" class="btn btn-outline-primary">Ver más link...</a>
-            -->
+<div class="row">
+    <div class="col">
+        <h1 *ngIf="termino == undefined">Héroes <small>Marvel y DC</small></h1>
+        <h1 *ngIf="termino != undefined">Buscando: <small>{{ this.termino }}</small></h1>
+        <hr>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col">
+        <div *ngIf="this.heroes.length > 0" class="card-columns">
+            <app-heroe-tarjeta (heroeSeleccionado)="verHeroe( $event )" [heroe]="foo" *ngFor="let foo of heroes"></app-heroe-tarjeta>
         </div>
+        <div *ngIf="this.heroes.length==0" class="alert alert-info animated fadeIn fast">No existen resultados con el término {{ termino }}</div>
     </div>
 </div>
